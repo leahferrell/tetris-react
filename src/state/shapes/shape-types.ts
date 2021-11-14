@@ -5,10 +5,10 @@ export interface Coordinate {
 	y: number
 }
 
-export interface ShapeProps {
+export interface ShapeState {
 	type: ShapeType,
 	orientation: number,
 	position?: Coordinate
 }
 
-export type NullableShapeState = ShapeProps | null | undefined
+export type NullableShapeState = ShapeState | null | undefined

@@ -1,18 +1,8 @@
-import {BlockProps} from '../../components/block/block'
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {BlockColor} from '../../data/shapes'
-import {TOTAL_COLUMNS, TOTAL_ROWS} from '../../data/grid'
 
-export const generateInitialGrid = (numOfRows: number, numOfColumns: number) => {
-	return new Array(numOfRows)
-		.fill(
-			new Array(numOfColumns)
-				.fill({
-					isGhosted: false,
-					color: BlockColor.Empty
-				})
-		)
-}
+import {BlockProps} from '../../components/block/block'
+import {TOTAL_COLUMNS, TOTAL_ROWS} from '../../data/grid'
+import {generateInitialGrid} from './grid-generator'
 
 export interface GridState {
 	rows: BlockProps[][],

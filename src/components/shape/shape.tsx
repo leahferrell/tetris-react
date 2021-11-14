@@ -1,9 +1,14 @@
+import {availableShapes, BlockColor, ShapeType} from '../../data/shapes'
 import Block from '../block/block'
-import {availableShapes, BlockColor} from '../../data/shapes'
-import './shape.scss'
-import {ShapeProps} from '../../state/shapes/shape-types'
 
-const Shape = ({type, orientation, position}: ShapeProps) => {
+import './shape.scss'
+
+export interface ShapeProps {
+	type: ShapeType,
+	orientation: number
+}
+
+const Shape = ({type, orientation}: ShapeProps) => {
 	if (type == null) {
 		return <div/>
 	}

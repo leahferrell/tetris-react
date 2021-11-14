@@ -4,7 +4,7 @@ import {availableShapes, BlockColor} from '../../data/shapes'
 import {GridState, update} from '../../state/grid/grid-slice'
 import {TOTAL_COLUMNS, TOTAL_ROWS} from '../../data/grid'
 import {removedLines} from '../../state/game/game-slice'
-import {Coordinate, ShapeProps} from '../../state/shapes/shape-types'
+import {Coordinate, ShapeState} from '../../state/shapes/shape-types'
 import {currentActions} from '../../state/shapes/current-slice'
 import {nextActions} from '../../state/shapes/next-slice'
 import {holdActions} from '../../state/shapes/hold-slice'
@@ -116,7 +116,7 @@ export const rotate = (increment: number) => (dispatch: AppDispatch, getState: (
 	dispatch(update(gridState))
 }
 
-export const useNext = (dispatch: AppDispatch, next: ShapeProps) => {
+export const useNext = (dispatch: AppDispatch, next: ShapeState) => {
 	dispatch(currentActions.update(next))
 	return dispatch(nextActions.update())
 }
@@ -158,7 +158,7 @@ const removeCompleteRows = (grid: BlockProps[][]) => {
 	}
 }
 
-const computeShapeCoordinates = (shape: ShapeProps) => {
+const computeShapeCoordinates = (shape: ShapeState) => {
 	const shapeData = availableShapes[shape.type]
 	const bitmap = shapeData.bitmap[shape.orientation]
 	const position = shape.position || {x: 3, y: 0} // x = (10 - 4) / 2
@@ -178,7 +178,7 @@ const computeShapeCoordinates = (shape: ShapeProps) => {
 	return coordinates
 }
 
-const checkCanShapeMove = (gutter: BlockProps[][], shape: ShapeProps) => {
+const checkCanShapeMove = (gutter: BlockProps[][], shape: ShapeState) => {
 	const shapeCoordinates = computeShapeCoordinates(shape)
 
 	for (let coordinate of shapeCoordinates) {
@@ -197,7 +197,7 @@ const checkCanShapeMove = (gutter: BlockProps[][], shape: ShapeProps) => {
 	return true
 }
 
-const renderNewGrid = (gutter: BlockProps[][], shape: ShapeProps) => {
+const renderNewGrid = (gutter: BlockProps[][], shape: ShapeState) => {
 	// copy existing gutter
 	const newGrid: BlockProps[][] = []
 

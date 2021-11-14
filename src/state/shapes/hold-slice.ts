@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {NullableShapeState, ShapeProps} from './shape-types'
+
+import {NullableShapeState, ShapeState} from './shape-types'
 
 const initialState: NullableShapeState = null as NullableShapeState
 
@@ -7,7 +8,7 @@ export const holdSlice = createSlice({
 	name: 'hold',
 	initialState,
 	reducers: {
-		update: (state: NullableShapeState, action: PayloadAction<ShapeProps>) => {
+		update: (state: NullableShapeState, action: PayloadAction<ShapeState>) => {
 			if (action.payload != null) {
 				return action.payload
 			} else {

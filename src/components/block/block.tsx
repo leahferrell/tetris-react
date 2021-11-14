@@ -1,5 +1,6 @@
-import './block.scss'
 import {BlockColor} from '../../data/shapes'
+
+import './block.scss'
 
 export interface BlockProps {
 	isGhosted: boolean,

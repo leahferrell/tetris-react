@@ -1,8 +1,15 @@
-import './stats-view.scss'
 import {useSelector} from 'react-redux'
+
 import {RootState} from '../../state/store'
 
-const Stat = ({ label, value }: { label: string, value: number }) => {
+import './stats-view.scss'
+
+interface StatProps {
+	label: string,
+	value: number
+}
+
+const Stat = ({ label, value }: StatProps) => {
 	return (
 		<div className='stat'>
 			<label>{label}: </label>
@@ -13,6 +20,7 @@ const Stat = ({ label, value }: { label: string, value: number }) => {
 
 const StatsView = () => {
 	const game = useSelector((state: RootState) => state.game)
+
 	return (
 		<div className='stats-view-container'>
 			<Stat label='Level' value={game.level} />

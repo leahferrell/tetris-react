@@ -1,7 +1,6 @@
-import './grid.scss'
 import Block, {BlockProps} from '../block/block'
-import {useSelector} from 'react-redux'
-import {RootState} from '../../state/store'
+
+import './grid.scss'
 
 interface GridProps {
 	rows: BlockProps[][]
@@ -30,14 +29,6 @@ const Grid = ({rows}: GridProps) => {
 		<div className="grid">
 			{gridContents}
 		</div>
-	)
-}
-
-export const GridContainer = () => {
-	const grid = useSelector((state: RootState) => state.grid)
-
-	return (
-		<Grid rows={grid.rows}/>
 	)
 }
 

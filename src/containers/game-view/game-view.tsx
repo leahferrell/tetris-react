@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {GridContainer} from '../../components/grid/grid'
-import {HoldShapeWindow, NextShapeWindow} from '../../components/shape-window/shape-window'
-import {tick} from '../../controller/game-controller/game-controller'
+import {HoldShapeWindow, NextShapeWindow} from '../shape-window/shape-window'
+import GridContainer from '../grid-container/grid-container'
+import {tick} from '../../controllers/game-controller/game-controller'
+import {createdInterval} from '../../state/game/game-slice'
+import {RootState} from '../../state/store'
 import StatsView from '../stats-view/stats-view'
 
 import './game-view.scss'
-import {createdInterval} from '../../state/game/game-slice'
-import {RootState} from '../../state/store'
 
 interface GameViewProps {
 	isPaused: boolean,

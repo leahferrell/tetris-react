@@ -1,12 +1,12 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {handleKeyPress} from '../../controller/input-controller/input-controller'
+import GameView from '../../containers/game-view/game-view'
+import PauseView from '../../containers/pause-view/pause-view'
+import {handleKeyPress} from '../../controllers/input-controller/key-press-controller'
 import {RootState} from '../../state/store'
 
 import './tetris-page.scss'
-import GameView from '../../views/game-view/game-view'
-import PauseView from '../../views/pause-view/pause-view'
 
 const TetrisPage = () => {
 	const isPaused = useSelector((state: RootState) => state.game.paused)
