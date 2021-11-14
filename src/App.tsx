@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import './App.scss'
 import GameView from './views/game-view/game-view'
 import {useSelector} from 'react-redux'
 import {RootState} from './state/store'
@@ -15,6 +15,9 @@ function App() {
 					<Route path="/" element={<GameView />} />
 				</Routes>
 			</HashRouter>
+			<footer className='app__footer'>
+				made with &hearts; by <a href='https://github.com/leahferrell/tetris-react' target='_blank'>leahferrell</a>
+			</footer>
 		</div>
 	)
 }
