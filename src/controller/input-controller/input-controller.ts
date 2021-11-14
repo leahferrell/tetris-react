@@ -25,3 +25,7 @@ export const handleKeyPress = (event: React.KeyboardEvent) => (dispatch: AppDisp
 	const handler = keyPressHandler[event.key]
 	handler && dispatch(handler())
 }
+
+export const handleOnTouchHoldContainer = (onTouchEvent: React.TouchEvent) => (dispatch: AppDispatch, getState: () => RootState) => {
+	dispatch(swapHold())
+}

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Grid from '../../components/grid/grid'
 import ShapeWindow from '../../components/shape-window/shape-window'
 import {tick} from '../../controller/game-controller/game-controller'
-import {handleKeyPress} from '../../controller/input-controller/input-controller'
+import {handleKeyPress, handleOnTouchHoldContainer} from '../../controller/input-controller/input-controller'
 import {RootState} from '../../state/store'
 import StatsView from '../stats-view/stats-view'
 
@@ -37,7 +37,7 @@ const GameView = () => {
 				</div>
 				<div className="game-view-container__content__side-bar">
 					<ShapeWindow title="Next" shape={shapes.next}/>
-					<ShapeWindow title="Hold" shape={shapes.hold}/>
+					<ShapeWindow onTouchStart={(event) => dispatch(handleOnTouchHoldContainer(event))} title="Hold" shape={shapes.hold}/>
 					<StatsView level={game.level} lines={game.lines} score={game.score}/>
 				</div>
 			</div>
