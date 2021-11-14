@@ -22,7 +22,6 @@ const keyPressHandler: KeyPressHandlerType = {
 }
 
 export const handleKeyPress = (event: React.KeyboardEvent) => (dispatch: AppDispatch, getState: () => RootState) => {
-	console.log('test: ', event.key)
 	const handler = keyPressHandler[event.key]
 	handler && dispatch(handler())
 }

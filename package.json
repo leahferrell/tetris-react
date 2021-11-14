@@ -1,7 +1,8 @@
 {
   "name": "tetris",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://leahferrell.github.io/tetris-react",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@types/node": "^12.0.0",
@@ -11,8 +12,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "redux-logger": "^3.0.6",
     "sass": "^1.43.4",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
@@ -22,21 +23,15 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
-		"eslint": "^7.32.0",
-		"eslint-plugin-react": "^7.27.0"
+    "gh-pages": "^3.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-		"lint": "eslint . --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+		"predeploy": "npm run build",
+    "deploy": "gh-pages -t -d build"
   },
   "browserslist": {
     "production": [

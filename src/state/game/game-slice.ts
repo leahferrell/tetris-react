@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {TICK_INTERVAL} from '../../data/game'
 
 export interface GameState {
-	gameOver: boolean
+	gameOver: boolean,
 	level: number,
 	lines: number,
 	paused: boolean,

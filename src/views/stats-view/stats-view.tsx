@@ -3,8 +3,8 @@ import './stats-view.scss'
 const Stat = ({ label, value }: { label: string, value: number }) => {
 	return (
 		<div className='stat'>
-			<label>{label}</label>
-			<p>{value}</p>
+			<label>{label}: </label>
+			<span>{value}</span>
 		</div>
 	)
 }

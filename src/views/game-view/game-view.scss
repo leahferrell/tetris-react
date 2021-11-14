@@ -1,8 +1,7 @@
 .game-view-container {
-	background-color: #61dafb;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 
 	&__title {
 		text-align: center;
@@ -11,24 +10,26 @@
 	}
 
 	&__content {
-		background-color: #61dafb;
-		flex-grow: 2;
-		border-radius: 1em;
-		margin: 10px;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		flex-grow: 2;
+		margin: 10px;
+		background-color: #cecbcb;
+		border-radius: 1em;
+		padding: 1em;
 
-		&__available-pieces {
+		&__side-bar {
 			display: flex;
-			flex-direction: row;
-			justify-content: space-evenly;
+			flex-direction: column;
+			justify-content: start;
 			text-align: center;
+			padding-left: 0.5em;
 		}
 
 		&__grid {
-			flex-grow: 2;
 			text-align: center;
 			align-self: center;
+			padding-right: 0.5em;
 		}
 
 		&__stats {
