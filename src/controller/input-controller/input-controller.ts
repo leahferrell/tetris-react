@@ -1,7 +1,6 @@
 import React from 'react'
-import {moveToTheSide, rotate, tick} from '../game-controller/game-controller'
+import {moveToTheSide, rotate, swapHold, tick} from '../game-controller/game-controller'
 import {AppDispatch, RootState} from '../../state/store'
-import {swapHold} from '../../state/shapes/shapes-slice'
 import {pause} from '../../state/game/game-slice'
 
 interface KeyPressHandlerType {

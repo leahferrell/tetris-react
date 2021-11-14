@@ -1,13 +1,17 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {gridSlice} from './grid/grid-slice'
-import {shapesSlice} from './shapes/shapes-slice'
 import {gameSlice} from './game/game-slice'
+import {currentSlice} from './shapes/current-slice'
+import {holdSlice} from './shapes/hold-slice'
+import {nextSlice} from './shapes/next-slice'
 
 export const store = configureStore({
 	reducer: {
 		grid: gridSlice.reducer,
-		shapes: shapesSlice.reducer,
-		game: gameSlice.reducer
+		game: gameSlice.reducer,
+		current: currentSlice.reducer,
+		hold: holdSlice.reducer,
+		next: nextSlice.reducer
 	}
 })
 

@@ -1,7 +1,7 @@
 import {handleKeyPress} from '../../controller/input-controller/input-controller'
 import {useDispatch} from 'react-redux'
 
-const PauseMenu = () => {
+const PauseView = () => {
 	const dispatch = useDispatch()
 
 	return (
@@ -9,4 +9,4 @@ const PauseMenu = () => {
 	)
 }
 
-export default PauseMenu
+export default PauseView

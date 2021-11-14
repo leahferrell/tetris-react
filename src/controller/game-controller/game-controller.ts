@@ -1,24 +1,26 @@
 import {AppDispatch, RootState} from '../../state/store'
-import {Coordinate, move, rotateShape, ShapeProps, useNext} from '../../state/shapes/shapes-slice'
 import {BlockProps} from '../../components/block/block'
 import {availableShapes, BlockColor} from '../../data/shapes'
 import {GridState, update} from '../../state/grid/grid-slice'
 import {TOTAL_COLUMNS, TOTAL_ROWS} from '../../data/grid'
 import {removedLines} from '../../state/game/game-slice'
+import {Coordinate, ShapeProps} from '../../state/shapes/shape-types'
+import {currentActions} from '../../state/shapes/current-slice'
+import {nextActions} from '../../state/shapes/next-slice'
+import {holdActions} from '../../state/shapes/hold-slice'
 
 export const tick = () => (dispatch: AppDispatch, getState: () => RootState) => {
-	const { grid, shapes } = getState()
+	const { grid, current, next } = getState()
 
 	const gutter = grid.gutterRows
-	const currentShape = shapes.current
 
 	// check if shape exists?
-	if (currentShape == null) {
-		return dispatch(useNext())
+	if (current == null) {
+		return useNext(dispatch, next)
 	}
 
 	// check if shape can be rendered
-	const canShapeMove = checkCanShapeMove(gutter, currentShape)
+	const canShapeMove = checkCanShapeMove(gutter, current)
 
 	if (!canShapeMove) {
 		const {rowsRemovedCount, newGrid} = removeCompleteRows(grid.rows)
@@ -29,41 +31,40 @@ export const tick = () => (dispatch: AppDispatch, getState: () => RootState) => 
 			gutterRows: newGrid
 		}
 		dispatch(update(gridState))
-		return dispatch(useNext())
+		return useNext(dispatch, next)
 	}
 
 	// render new grid
 	const gridState: GridState = {
-		rows: renderNewGrid(gutter, currentShape),
+		rows: renderNewGrid(gutter, current),
 		gutterRows: gutter
 	}
 	dispatch(update(gridState))
 
 	// move down one
-	const currentPosition = currentShape.position || {x: 3, y: 0} // x = (10 - 4) / 2
+	const currentPosition = current.position || {x: 3, y: 0} // x = (10 - 4) / 2
 	const incrementedPosition = { x: currentPosition.x, y: currentPosition.y + 1 }
-	return dispatch(move(incrementedPosition))
+	return dispatch(currentActions.move(incrementedPosition))
 }
 
 export const moveToTheSide = (movement: number) => (dispatch: AppDispatch, getState: () => RootState) => {
-	const { grid, shapes } = getState()
+	const { grid, current, next } = getState()
 
 	const gutter = grid.gutterRows
-	const currentShape = shapes.current
 
 	// check if shape exists?
-	if (currentShape == null) {
-		return dispatch(useNext())
+	if (current == null) {
+		return useNext(dispatch, next)
 	}
 
 	// move left/right
-	const currentPosition = currentShape.position || {x: 3, y: 0} // x = (10 - 4) / 2
+	const currentPosition = current.position || {x: 3, y: 0} // x = (10 - 4) / 2
 	const incrementedPosition = { x: currentPosition.x + movement, y: currentPosition.y }
 
 	// check if shape can be rendered
 	const canShapeMove = checkCanShapeMove(gutter, {
-		type: currentShape.type,
-		orientation: currentShape.orientation,
+		type: current.type,
+		orientation: current.orientation,
 		position: incrementedPosition
 	})
 
@@ -71,34 +72,33 @@ export const moveToTheSide = (movement: number) => (dispatch: AppDispatch, getSt
 		return
 	}
 
-	dispatch(move(incrementedPosition))
+	dispatch(currentActions.move(incrementedPosition))
 
 	// render new grid
 	const gridState: GridState = {
-		rows: !canShapeMove ? grid.rows : renderNewGrid(gutter, currentShape),
+		rows: !canShapeMove ? grid.rows : renderNewGrid(gutter, current),
 		gutterRows: !canShapeMove ? grid.rows : gutter
 	}
 	dispatch(update(gridState))
 }
 
 export const rotate = (increment: number) => (dispatch: AppDispatch, getState: () => RootState) => {
-	const { grid, shapes } = getState()
+	const { grid, current, next } = getState()
 
 	const gutter = grid.gutterRows
-	const currentShape = shapes.current
 
 	// check if shape exists?
-	if (currentShape == null) {
-		return dispatch(useNext())
+	if (current == null) {
+		return useNext(dispatch, next)
 	}
 
 	// move left/right
-	const currentPosition = currentShape.position || {x: 3, y: 0} // x = (10 - 4) / 2
+	const currentPosition = current.position || {x: 3, y: 0} // x = (10 - 4) / 2
 
 	// check if shape can be rendered
 	const canShapeMove = checkCanShapeMove(gutter, {
-		type: currentShape.type,
-		orientation: (currentShape.orientation + increment) % 4,
+		type: current.type,
+		orientation: (current.orientation + increment) % 4,
 		position: currentPosition
 	})
 
@@ -106,14 +106,34 @@ export const rotate = (increment: number) => (dispatch: AppDispatch, getState: (
 		return
 	}
 
-	dispatch(rotateShape())
+	dispatch(currentActions.rotate())
 
 	// render new grid
 	const gridState: GridState = {
-		rows: !canShapeMove ? grid.rows : renderNewGrid(gutter, currentShape),
+		rows: !canShapeMove ? grid.rows : renderNewGrid(gutter, current),
 		gutterRows: !canShapeMove ? grid.rows : gutter
 	}
 	dispatch(update(gridState))
+}
+
+export const useNext = (dispatch: AppDispatch, next: ShapeProps) => {
+	dispatch(currentActions.update(next))
+	return dispatch(nextActions.update())
+}
+
+export const swapHold = () => (dispatch: AppDispatch, getState: () => RootState) => {
+	const { current, hold, next } = getState()
+
+	if (hold != null) {
+		dispatch(currentActions.update(hold))
+	} else {
+		dispatch(currentActions.update(next))
+		dispatch(nextActions.update())
+	}
+
+	if (current != null) {
+		dispatch(holdActions.update(current))
+	}
 }
 
 const removeCompleteRows = (grid: BlockProps[][]) => {

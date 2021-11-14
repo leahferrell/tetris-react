@@ -1,7 +1,7 @@
-import {ShapeProps} from '../../state/shapes/shapes-slice'
 import Block from '../block/block'
 import {availableShapes, BlockColor} from '../../data/shapes'
 import './shape.scss'
+import {ShapeProps} from '../../state/shapes/shape-types'
 
 const Shape = ({type, orientation, position}: ShapeProps) => {
 	if (type == null) {
