@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 
 import {GridContainer} from '../../components/grid/grid'
 import {HoldShapeWindow, NextShapeWindow} from '../../components/shape-window/shape-window'
@@ -7,6 +7,8 @@ import {tick} from '../../controller/game-controller/game-controller'
 import StatsView from '../stats-view/stats-view'
 
 import './game-view.scss'
+import {createdInterval} from '../../state/game/game-slice'
+import {RootState} from '../../state/store'
 
 interface GameViewProps {
 	isPaused: boolean,
@@ -14,23 +16,17 @@ interface GameViewProps {
 }
 
 const GameView = ({ isPaused, tickInterval }: GameViewProps) => {
-	const [currentInterval, setCurrentInterval] = useState<NodeJS.Timeout | null>(null)
+	const currentInterval = useSelector((state: RootState) => state.game.interval)
 
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		if (currentInterval != null) {
-			clearInterval(currentInterval)
-		}
-
-		if (isPaused) {
-			setCurrentInterval(null)
-		} else {
+		if (currentInterval == null) {
 			const interval = setInterval(() => {
 				dispatch(tick())
 			}, tickInterval)
 
-			setCurrentInterval(interval)
+			dispatch(createdInterval(interval))
 		}
 		// eslint-disable-next-line
 	}, [dispatch, tickInterval, isPaused])
