@@ -1,0 +1,38 @@
+.game-view-container {
+	background-color: #61dafb;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	&__title {
+		text-align: center;
+		padding: 10px;
+		font-size: 3em;
+	}
+
+	&__content {
+		background-color: #61dafb;
+		flex-grow: 2;
+		border-radius: 1em;
+		margin: 10px;
+		display: flex;
+		flex-direction: column;
+
+		&__available-pieces {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly;
+			text-align: center;
+		}
+
+		&__grid {
+			flex-grow: 2;
+			text-align: center;
+			align-self: center;
+		}
+
+		&__stats {
+
+		}
+	}
+}

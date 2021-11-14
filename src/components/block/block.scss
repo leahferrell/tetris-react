@@ -1,0 +1,39 @@
+.block {
+	height: 1.5em;
+	width: 1.5em;
+	display: block;
+	background-color: transparent;
+	border: transparent solid 1px;
+
+	&--ghosted {
+		border-color: white;
+	}
+
+	&--green {
+		background-color: green;
+	}
+
+	&--red {
+		background-color: red;
+	}
+
+	&--blue {
+		background-color: blue;
+	}
+
+	&--yellow {
+		background-color: yellow;
+	}
+
+	&--teal {
+		background-color: teal;
+	}
+
+	&--purple {
+		background-color: purple;
+	}
+
+	&--orange {
+		background-color: orange;
+	}
+}
