@@ -5,6 +5,11 @@
 	background-color: transparent;
 	border: transparent solid 1px;
 
+	@media (max-width: 375px) {
+		height: 1em;
+		width: 1em;
+	}
+
 	&--ghosted {
 		border-color: white;
 	}

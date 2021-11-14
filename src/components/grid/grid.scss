@@ -4,6 +4,10 @@
 	width: 260px;
 	background-color: #ffffff;
 
+	@media (max-width: 375px) {
+		width: 180px;
+	}
+
 	&__row {
 		display: flex;
 		flex-direction: row;
