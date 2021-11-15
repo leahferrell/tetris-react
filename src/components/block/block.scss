@@ -1,3 +1,5 @@
+@use 'src/themes/default';
+
 .block {
   display: block;
   width: 1.5em;
@@ -11,34 +13,34 @@
   }
 
   &--ghosted {
-    border-color: white;
+    border-color: default.$default-ghost;
   }
 
   &--green {
-    background-color: green;
+    background-color: default.$default-green;
   }
 
   &--red {
-    background-color: red;
+    background-color: default.$default-red;
   }
 
   &--blue {
-    background-color: blue;
+    background-color: default.$default-blue;
   }
 
   &--yellow {
-    background-color: yellow;
+    background-color: default.$default-yellow;
   }
 
   &--teal {
-    background-color: teal;
+    background-color: default.$default-teal;
   }
 
   &--purple {
-    background-color: purple;
+    background-color: default.$default-purple;
   }
 
   &--orange {
-    background-color: orange;
+    background-color: default.$default-orange;
   }
 }

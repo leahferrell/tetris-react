@@ -1,8 +1,10 @@
+@use 'src/themes/default';
+
 .grid {
   width: 260px;
   text-align: center;
-  background-color: #fff;
-  border: white 1px solid;
+  background-color: default.$default-grid-color;
+  border: default.$default-grid-color 1px solid;
 
   @media (max-width: 375px) {
     width: 260px;

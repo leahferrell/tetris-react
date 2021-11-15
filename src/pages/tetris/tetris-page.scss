@@ -1,3 +1,5 @@
+@use 'src/themes/default';
+
 .tetris-page {
   display: flex;
   flex-direction: column;
@@ -15,7 +17,7 @@
     flex-grow: 2;
     margin: 10px;
     padding: 1em;
-    background-color: #cecbcb;
+    background-color: default.$default-game-color;
     border-radius: 1em;
 
     @media (max-width: 375px) {
