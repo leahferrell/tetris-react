@@ -15,9 +15,9 @@ const TetrisPage = (): ReactElement => {
   const dispatch = useDispatch()
 
   return (
-    <div className="tetris-page" onKeyDown={(event) => dispatch(handleKeyPress(event))} tabIndex={-1}>
-      <div className="tetris-page__title">Tetris</div>
-      <div className="tetris-page__content">
+    <div className='tetris-page' onKeyDown={(event) => dispatch(handleKeyPress(event))} tabIndex={-1}>
+      <div className='tetris-page__title'>Tetris</div>
+      <div className='tetris-page__content'>
         {
           isPaused ?
             <PauseView/>
