@@ -1,17 +1,17 @@
 .grid {
-	text-align: center;
-	border: white 1px solid;
-	width: 260px;
-	background-color: #ffffff;
+  text-align: center;
+  border: white 1px solid;
+  width: 260px;
+  background-color: #fff;
 
-	@media (max-width: 375px) {
-		width: 260px;
-	}
+  @media (max-width: 375px) {
+    width: 260px;
+  }
 
-	&__row {
-		display: flex;
-		flex-direction: row;
-		width: auto;
-		justify-content: center;
-	}
+  &__row {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    justify-content: center;
+  }
 }

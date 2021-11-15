@@ -1,44 +1,44 @@
 .block {
-	height: 1.5em;
-	width: 1.5em;
-	display: block;
-	background-color: transparent;
-	border: transparent solid 1px;
+  height: 1.5em;
+  width: 1.5em;
+  display: block;
+  background-color: transparent;
+  border: transparent solid 1px;
 
-	@media (max-width: 375px) {
-		height: 1.5em;
-		width: 1.5em;
-	}
+  @media (max-width: 375px) {
+    height: 1.5em;
+    width: 1.5em;
+  }
 
-	&--ghosted {
-		border-color: white;
-	}
+  &--ghosted {
+    border-color: white;
+  }
 
-	&--green {
-		background-color: green;
-	}
+  &--green {
+    background-color: green;
+  }
 
-	&--red {
-		background-color: red;
-	}
+  &--red {
+    background-color: red;
+  }
 
-	&--blue {
-		background-color: blue;
-	}
+  &--blue {
+    background-color: blue;
+  }
 
-	&--yellow {
-		background-color: yellow;
-	}
+  &--yellow {
+    background-color: yellow;
+  }
 
-	&--teal {
-		background-color: teal;
-	}
+  &--teal {
+    background-color: teal;
+  }
 
-	&--purple {
-		background-color: purple;
-	}
+  &--purple {
+    background-color: purple;
+  }
 
-	&--orange {
-		background-color: orange;
-	}
+  &--orange {
+    background-color: orange;
+  }
 }
