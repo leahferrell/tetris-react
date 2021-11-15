@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {ReactElement, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {HoldShapeWindow, NextShapeWindow} from '../shape-window/shape-window'
@@ -11,38 +11,38 @@ import StatsView from '../stats-view/stats-view'
 import './game-view.scss'
 
 interface GameViewProps {
-	isPaused: boolean,
-	tickInterval: number
+  isPaused: boolean,
+  tickInterval: number
 }
 
-const GameView = ({ isPaused, tickInterval }: GameViewProps) => {
-	const currentInterval = useSelector((state: RootState) => state.game.interval)
+const GameView = ({ isPaused, tickInterval }: GameViewProps): ReactElement => {
+  const currentInterval = useSelector((state: RootState) => state.game.interval)
 
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-	useEffect(() => {
-		if (currentInterval == null) {
-			const interval = setInterval(() => {
-				dispatch(tick())
-			}, tickInterval)
+  useEffect(() => {
+    if (currentInterval == null) {
+      const interval = setInterval(() => {
+        dispatch(tick())
+      }, tickInterval)
 
-			dispatch(createdInterval(interval))
-		}
-		// eslint-disable-next-line
+      dispatch(createdInterval(interval))
+    }
+    // eslint-disable-next-line
 	}, [dispatch, tickInterval, isPaused])
 
-	return (
-		<React.Fragment>
-			<div className="game-view__grid">
-				<GridContainer />
-			</div>
-			<div className="game-view__side-bar">
-				<NextShapeWindow />
-				<HoldShapeWindow />
-				<StatsView />
-			</div>
-		</React.Fragment>
-	)
+  return (
+    <React.Fragment>
+      <div className="game-view__grid">
+        <GridContainer />
+      </div>
+      <div className="game-view__side-bar">
+        <NextShapeWindow />
+        <HoldShapeWindow />
+        <StatsView />
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default GameView
