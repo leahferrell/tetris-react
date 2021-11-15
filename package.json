@@ -27,6 +27,8 @@
     "@typescript-eslint/parser": "^5.3.1",
     "eslint": "^7.32.0",
     "gh-pages": "^3.2.3",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.0.2",
     "postcss": "^8.3.11",
     "postcss-scss": "^4.0.2",
     "stylelint": "^14.1.0",
@@ -34,14 +36,31 @@
     "stylelint-config-standard-scss": "^2.0.1",
     "stylelint-order": "^5.0.0"
   },
+	"lint-staged": {
+		"src/**/*.{js,jsx,ts,tsx}": [
+			"eslint . --fix", "git add"
+		],
+		"src/**/*.scss": [
+			"stylelint --syntax scss --fix", "git add"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && gh-pages -t -d build",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix && stylelint '**/*.scss' --fix"
-  },
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix && stylelint '**/*.scss' --fix",
+		"lint:js": "eslint . --ext .js,.jsx,.ts,.tsx",
+		"lint:js:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+		"lint:scss": "stylelint '**/*.scss'",
+		"lint:scss:fix": "stylelint '**/*.scss' --fix"
+	},
   "eslintConfig": {
     "extends": [
       "react-app",
