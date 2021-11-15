@@ -34,6 +34,9 @@ export const currentSlice = createSlice({
       } else {
         return state
       }
+    },
+    clear: () => {
+      return null
     }
   }
 })

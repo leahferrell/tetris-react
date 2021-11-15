@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {HoldShapeWindow, NextShapeWindow} from '../shape-window/shape-window'
 import GridContainer from '../grid-container/grid-container'
 import {tick} from '../../controllers/game-controller/game-controller'
-import {createdInterval} from '../../state/game/game-slice'
+import {gameActions} from '../../state/game/game-slice'
 import {RootState} from '../../state/store'
 import StatsView from '../stats-view/stats-view'
 
@@ -26,7 +26,7 @@ const GameView = ({ isPaused, tickInterval }: GameViewProps): ReactElement => {
         dispatch(tick())
       }, tickInterval)
 
-      dispatch(createdInterval(interval))
+      dispatch(gameActions.createdInterval(interval))
     }
     // eslint-disable-next-line
 	}, [dispatch, tickInterval, isPaused])

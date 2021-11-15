@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {moveToTheSide, rotate, swapHold, tick} from '../game-controller/game-controller'
-import {pause} from '../../state/game/game-slice'
+import {gameActions} from '../../state/game/game-slice'
 import {AppDispatch, RootState} from '../../state/store'
 import {ActionCreatorWithoutPayload, PayloadAction} from '@reduxjs/toolkit'
 import {Coordinate} from '../../state/shapes/shape-types'
@@ -20,8 +20,8 @@ const keyPressHandler: KeyPressHandlerType = {
   ' ': () => () => {
     console.log('drop: hard')
   }, // hard drop
-  p: pause,
-  P: pause,
+  p: gameActions.pause,
+  P: gameActions.pause,
   Shift: swapHold // hold
 }
 

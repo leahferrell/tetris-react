@@ -14,6 +14,9 @@ export const holdSlice = createSlice({
       } else {
         return state
       }
+    },
+    clear: () => {
+      return null
     }
   }
 })

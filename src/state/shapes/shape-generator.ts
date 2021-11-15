@@ -3,10 +3,8 @@ import {ShapeState} from './shape-types'
 
 export const generateNextShape = (): ShapeState => {
   const shapeTypeId = Math.floor(Math.random() * totalNumShapes)
-  const shape: ShapeState = {
+  return {
     type: shapeTypeId,
     orientation: 0
   }
-
-  return shape
 }

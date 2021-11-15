@@ -11,6 +11,9 @@ export const nextSlice = createSlice({
   reducers: {
     update: () => {
       return generateNextShape() // TODO: fix this
+    },
+    clear: () => {
+      return generateNextShape()
     }
   }
 })

@@ -3,13 +3,21 @@ import {PayloadAction} from '@reduxjs/toolkit'
 import {BlockProps} from '../../components/block/block'
 import {TOTAL_COLUMNS, TOTAL_ROWS} from '../../data/grid'
 import {availableShapes, BlockColor} from '../../data/shapes'
-import {removedLines} from '../../state/game/game-slice'
-import {GridState, update} from '../../state/grid/grid-slice'
+import {gameActions} from '../../state/game/game-slice'
+import {gridActions, GridState} from '../../state/grid/grid-slice'
 import {currentActions} from '../../state/shapes/current-slice'
 import {holdActions} from '../../state/shapes/hold-slice'
 import {nextActions} from '../../state/shapes/next-slice'
 import {Coordinate, ShapeState} from '../../state/shapes/shape-types'
 import {AppDispatch, RootState} from '../../state/store'
+
+export const newGame = () => (dispatch: AppDispatch): void => {
+  dispatch(currentActions.clear())
+  dispatch(nextActions.clear())
+  dispatch(holdActions.clear())
+  dispatch(gridActions.clear())
+  dispatch(gameActions.start())
+}
 
 export const tick = () => (dispatch: AppDispatch, getState: () => RootState): void | PayloadAction<Coordinate> | PayloadAction => {
   const { grid, current, next } = getState()
@@ -26,13 +34,20 @@ export const tick = () => (dispatch: AppDispatch, getState: () => RootState): vo
 
   if (!canShapeMove) {
     const {rowsRemovedCount, newGrid} = removeCompleteRows(grid.rows)
-    dispatch(removedLines(rowsRemovedCount))
+
+    if (rowsRemovedCount > 0) {
+      dispatch(gameActions.removedLines(rowsRemovedCount))
+    }
+
+    if (isGameOver()) {
+      return dispatch(gameActions.gameOver())
+    }
 
     const gridState: GridState = {
       rows: newGrid,
       gutterRows: newGrid
     }
-    dispatch(update(gridState))
+    dispatch(gridActions.update(gridState))
     return useNext(dispatch, next)
   }
 
@@ -41,7 +56,7 @@ export const tick = () => (dispatch: AppDispatch, getState: () => RootState): vo
     rows: renderNewGrid(gutter, current),
     gutterRows: gutter
   }
-  dispatch(update(gridState))
+  dispatch(gridActions.update(gridState))
 
   // move down one
   const currentPosition = current.position || {x: 3, y: 0} // x = (10 - 4) / 2
@@ -81,7 +96,7 @@ export const moveToTheSide = (movement: number) => (dispatch: AppDispatch, getSt
     rows: !canShapeMove ? grid.rows : renderNewGrid(gutter, current),
     gutterRows: !canShapeMove ? grid.rows : gutter
   }
-  dispatch(update(gridState))
+  dispatch(gridActions.update(gridState))
 }
 
 export const rotate = (increment: number) => (dispatch: AppDispatch, getState: () => RootState): void | PayloadAction => {
@@ -115,7 +130,7 @@ export const rotate = (increment: number) => (dispatch: AppDispatch, getState: (
     rows: !canShapeMove ? grid.rows : renderNewGrid(gutter, current),
     gutterRows: !canShapeMove ? grid.rows : gutter
   }
-  dispatch(update(gridState))
+  dispatch(gridActions.update(gridState))
 }
 
 export const useNext = (dispatch: AppDispatch, next: ShapeState): void | PayloadAction => {
@@ -136,6 +151,10 @@ export const swapHold = () => (dispatch: AppDispatch, getState: () => RootState)
   if (current != null) {
     dispatch(holdActions.update(current))
   }
+}
+
+const isGameOver = (): boolean => {
+  return false
 }
 
 const removeCompleteRows = (grid: BlockProps[][]) => {

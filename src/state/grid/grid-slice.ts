@@ -20,8 +20,11 @@ export const gridSlice = createSlice({
   reducers: {
     update: (state: GridState, action: PayloadAction<GridState>) => {
       return action.payload
+    },
+    clear: () => {
+      return initialState
     }
   }
 })
 
-export const { update } = gridSlice.actions
+export const gridActions = gridSlice.actions

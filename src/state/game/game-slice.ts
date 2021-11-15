@@ -3,6 +3,7 @@ import {TICK_INTERVAL} from '../../data/game'
 
 export interface GameState {
   gameOver: boolean,
+  hasStarted: boolean,
   interval?: NodeJS.Timeout,
   level: number,
   lines: number,
@@ -14,6 +15,7 @@ export interface GameState {
 
 const initialState: GameState = {
   gameOver: false,
+  hasStarted: false,
   level: 1,
   lines: 0,
   paused: true,
@@ -56,8 +58,26 @@ export const gameSlice = createSlice({
         ...state,
         interval: action.payload
       }
+    },
+    start: () => {
+      return {
+        ...initialState,
+        hasStarted: true,
+        paused: false
+      }
+    },
+    gameOver: (state: GameState) => {
+      if (state.interval != null) {
+        clearInterval(state.interval) // TODO: figure out where to put this since this is a side effect
+      }
+
+      return {
+        ...state,
+        paused: true,
+        gameOver: true
+      }
     }
   }
 })
 
-export const { pause, removedLines, createdInterval } = gameSlice.actions
+export const gameActions = gameSlice.actions
