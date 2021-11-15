@@ -1,11 +1,11 @@
 .shape {
-  text-align: center;
   width: 104px;
+  text-align: center;
 
   &__row {
     display: flex;
     flex-direction: row;
-    width: auto;
     justify-content: center;
+    width: auto;
   }
 }
